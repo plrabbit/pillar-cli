@@ -1,0 +1,25 @@
+{
+  "name": "vunt-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "vunt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^2.20.3",
+    "download-git-repo": "^3.0.2",
+    "execa": "^4.0.0",
+    "fs-extra": "^8.1.0",
+    "handlebars": "^4.7.3",
+    "inquirer": "^7.0.4",
+    "metalsmith": "^2.3.0",
+    "minimist": "^1.2.0",
+    "ora": "^4.0.3",
+    "rimraf": "^3.0.2",
+    "validate-npm-package-name": "^3.0.0"
+  }
+}
