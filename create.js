@@ -3,14 +3,9 @@ const path = require('path')
 const readline = require('readline')
 const validateProjectName = require('validate-npm-package-name')
 const inquirer = require('inquirer')
-const download = require('download-git-repo')
-const ora = require('ora')
 const chalk = require('chalk')
 
-function run (command, args) {
-  if (!args) { [command, ...args] = command.split(/\s+/) }
-  return execa(command, args, { cwd: this.context })
-}
+const Creator = require('./lib/create/Creator')
 
 async function clearConsole(title) {
   if (process.stdout.isTTY) {
@@ -35,7 +30,7 @@ async function create(projectName) {
   const name = inCurrent ? path.relative('../', cwd) : projectName
 
   // Get absolute path for the project
-  const targetDir = path.resolve(cwd, projectName || '.')
+  const targetDir = inCurrent ? path.resolve(cwd, '.') : path.resolve(cwd, projectName)
 
   const result = validateProjectName(name)
 
@@ -47,14 +42,14 @@ async function create(projectName) {
     result.warnings && result.warnings.forEach(warn => {
       console.error(chalk.red.dim('Warning: ' + warn))
     })
-    exit(1)
+    process.exit(1)
   }
 
   if (fs.existsSync(targetDir)) {
     await clearConsole()
 
     if (inCurrent) {
-      const { ok } = await inquirer.prompt([
+      const {ok} = await inquirer.prompt([
         {
           name: 'ok',
           type: 'confirm',
@@ -65,14 +60,14 @@ async function create(projectName) {
         return
       }
     } else {
-      const { action } = await inquirer.prompt([
+      const {action} = await inquirer.prompt([
         {
           name: 'action',
           type: 'list',
           message: `Target directory ${chalk.cyan(targetDir)} already exists. Pick an action:`,
           choices: [
-            { name: 'Overwrite', value: 'overwrite' },
-            { name: 'Cancel', value: false }
+            {name: 'Overwrite', value: 'overwrite'},
+            {name: 'Cancel', value: false}
           ]
         }
       ])
@@ -85,18 +80,9 @@ async function create(projectName) {
     }
   }
 
-  const spinner = ora('Downloading vunt-template')
-  spinner.start()
-  download('github:plrabbit/vunt', targetDir, function (err) {
-    spinner.stop()
-    if (err) console.log('Failed to download vunt-template. ' + chalk.redBright(err.message.trim()))
-    else {
-      console.log(chalk.greenBright('Finished.'))
-      require('generator')({
-        projectName: name
-      }, targetDir)
-    }
-  })
+  const creator = new Creator(projectName, targetDir)
+  creator.create()
+
 }
 
 module.exports = (...args) => {

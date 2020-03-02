@@ -1,13 +1,20 @@
 {
   "name": "vunt-cli",
   "version": "1.0.0",
-  "description": "",
-  "main": "vunt.js",
+  "description": "CLI tool for vunt.",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create": "node index create"
   },
-  "author": "",
-  "license": "ISC",
+  "bin": {
+    "vunt-cli": "index.js"
+  },
+  "author": "plrabbit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plrabbit/vunt-cli.git"
+  },
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^2.20.3",
