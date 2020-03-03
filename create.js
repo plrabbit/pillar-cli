@@ -30,7 +30,12 @@ async function create(projectName) {
   const name = inCurrent ? path.relative('../', cwd) : projectName
 
   // Get absolute path for the project
-  const targetDir = inCurrent ? path.resolve(cwd, '.') : path.resolve(cwd, projectName)
+  let targetDir
+  if(process.env.NODE_ENV === 'development') {
+    targetDir = inCurrent ? path.resolve(cwd, '../') : path.resolve(cwd, `../${projectName}`)
+  } else {
+    targetDir = inCurrent ? path.resolve(cwd, '.') : path.resolve(cwd, projectName)
+  }
 
   const result = validateProjectName(name)
 
