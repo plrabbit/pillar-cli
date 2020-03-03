@@ -20,7 +20,7 @@
     "chalk": "^3.0.0",
     "commander": "^2.20.3",
     "download-git-repo": "^3.0.2",
-    "execa": "^4.0.0",
+    "execa": "^1.0.0",
     "fs-extra": "^8.1.0",
     "handlebars": "^4.7.3",
     "inquirer": "^7.0.4",

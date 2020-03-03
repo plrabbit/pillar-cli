@@ -86,12 +86,13 @@ async function create(projectName) {
   }
 
   const creator = new Creator(projectName, targetDir)
-  creator.create()
+  await creator.create()
 
 }
 
 module.exports = (...args) => {
   return create(...args).catch(err => {
     console.log(chalk.red(err))
+    process.exit(1)
   })
 }
