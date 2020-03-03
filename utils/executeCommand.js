@@ -1,8 +1,7 @@
-const { chalk, execa } = require('@vue/cli-shared-utils')
+const chalk = require('chalk')
+const execa = require('execa')
 const EventEmitter = require('events')
 const readline = require('readline')
-
-const debug = require('debug')('vue-cli:install')
 
 class InstallProgress extends EventEmitter {
   constructor () {
@@ -55,8 +54,6 @@ function renderProgressBar (curr, total) {
 
 const progress = exports.progress = new InstallProgress()
 exports.executeCommand = function executeCommand (command, args, cwd) {
-  debug(`command: `, command)
-  debug(`args: `, args)
 
   return new Promise((resolve, reject) => {
     const apiMode = process.env.VUE_CLI_API_MODE
