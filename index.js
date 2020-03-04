@@ -21,6 +21,22 @@ program
     require('./create')(name)
   })
 
+if (process.platform === "win32") {
+  const rl = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+
+  rl.on("SIGINT", function () {
+    process.emit("SIGINT");
+  })
+}
+
+process.on("SIGINT", function () {
+  //graceful shutdown
+  process.exit();
+})
+
 program.commands.forEach(c => c.on('--help', () => console.log()))
 
 program.parse(process.argv)
