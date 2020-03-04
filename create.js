@@ -19,7 +19,7 @@ async function clearConsole(title) {
   }
 }
 
-async function create(projectName) {
+async function create(projectName, options) {
   // Get Node.js working directory
   const cwd = process.cwd()
 
@@ -86,7 +86,7 @@ async function create(projectName) {
   }
 
   const creator = new Creator(projectName, targetDir)
-  await creator.create()
+  await creator.create(options)
 
 }
 

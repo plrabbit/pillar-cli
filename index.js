@@ -4,40 +4,48 @@ const program = require('commander')
 const chalk = require('chalk')
 const minimist = require('minimist')
 
+program
+  .command('create <project-name>')
+  .description('create a new project with vunt-template')
+  .option('-e --no-depend', 'Skip dependencies installation')
+  .option('-n, --no-git', 'Skip git initialization')
+  .action((name, cmd) => {
+    const options = cleanArgs(cmd)
+    // console.log(options)
+
+    if (minimist(process.argv.slice(3))._.length > 1) {
+      console.log(chalk.yellow('\n Info: You provided more than one argument. The first one will be used as the app\'s name, the rest are ignored.'))
+    }
+
+    require('./create')(name, options)
+  })
+
+program.commands.forEach(c => c.on('--help', () => console.log()))
+
 const enhanceErrorMessages = require('./utils/enhanceErrorMessages')
 
 enhanceErrorMessages('missingArgument', argName => {
   return `Missing required argument ${chalk.yellow(`<${argName}>`)}.`
 })
 
-program
-  .command('create <project-name>')
-  .description('create a new project with vunt-template')
-  .action(name => {
-    if (minimist(process.argv.slice(3))._.length > 1) {
-      console.log(chalk.yellow('\n Info: You provided more than one argument. The first one will be used as the app\'s name, the rest are ignored.'))
-    }
-
-    require('./create')(name)
-  })
-
-if (process.platform === "win32") {
-  const rl = require("readline").createInterface({
-    input: process.stdin,
-    output: process.stdout
-  })
-
-  rl.on("SIGINT", function () {
-    process.emit("SIGINT");
-  })
-}
-
-process.on("SIGINT", function () {
-  //graceful shutdown
-  process.exit();
-})
-
-program.commands.forEach(c => c.on('--help', () => console.log()))
-
 program.parse(process.argv)
 if (program.args.length < 1) return program.help()
+
+function camelize (str) {
+  return str.replace(/-(\w)/g, (_, c) => c ? c.toUpperCase() : '')
+}
+
+// commander passes the Command object itself as options,
+// extract only actual options into a fresh object.
+function cleanArgs (cmd) {
+  const args = {}
+  cmd.options.forEach(o => {
+    const key = camelize(o.long.replace(/(^--no-)|(^--)/, ''))
+    // if an option is not present and Command has a method with the same name
+    // it should not be copied
+    if (typeof cmd[key] !== 'function' && typeof cmd[key] !== 'undefined') {
+      args[key] = cmd[key]
+    }
+  })
+  return args
+}
