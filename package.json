@@ -1,12 +1,12 @@
 {
   "name": "vunt-cli",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "CLI tool for vunt.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "create": "set NODE_ENV=development&&node index create",
-    "build": "set NODE_ENV=production&&npm pack"
+    "pack": "set NODE_ENV=production&&npm pack"
   },
   "bin": {
     "vunt-cli": "index.js"

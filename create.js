@@ -1,23 +1,11 @@
 const fs = require('fs-extra')
 const path = require('path')
-const readline = require('readline')
 const validateProjectName = require('validate-npm-package-name')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 
+const {clearConsole} = require('./utils')
 const Creator = require('./lib/create/Creator')
-
-async function clearConsole(title) {
-  if (process.stdout.isTTY) {
-    const blank = '\n'.repeat(process.stdout.rows)
-    console.log(blank)
-    readline.cursorTo(process.stdout, 0, 0)
-    readline.clearScreenDown(process.stdout)
-    if (title) {
-      console.log(title)
-    }
-  }
-}
 
 async function create(projectName, options) {
   // Get Node.js working directory
