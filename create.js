@@ -5,6 +5,7 @@ const inquirer = require('inquirer')
 const chalk = require('chalk')
 
 const {clearConsole} = require('./utils')
+const templateContents = require('./lib/create/templateContents')
 const Creator = require('./lib/create/Creator')
 
 async function create(projectName, options) {
@@ -73,9 +74,34 @@ async function create(projectName, options) {
     }
   }
 
+  await clearConsole()
+  const {template} = await inquirer.prompt([
+    {
+      name: 'template',
+      type: 'list',
+      message: `Choose a template:`,
+      choices: getTemplateChoices()
+    }
+  ])
+  if (!template) {
+    return
+  }
+
+  options.usingTemplate = templateContents.filter(n => n.name.toLowerCase() === template)[0]
+
   const creator = new Creator(projectName, targetDir)
   await creator.create(options)
 
+}
+
+function getTemplateChoices() {
+  const contents = templateContents.map(n => {
+    return {
+      name: `${n.name} (${n.description})`,
+      value: n.name.toLowerCase()
+    }
+  })
+  return contents.concat({name: 'Cancel', value: ''})
 }
 
 module.exports = (...args) => {

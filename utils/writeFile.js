@@ -1,7 +1,7 @@
 const fs = require('fs-extra')
 const path = require('path')
 
-module.exports = async function writeFile (dir, files) {
+exports.writeFile = async function (dir, files) {
   Object.keys(files).forEach((name) => {
     const filePath = path.join(dir, name)
     fs.ensureDirSync(path.dirname(filePath))

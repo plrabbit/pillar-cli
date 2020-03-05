@@ -4,14 +4,15 @@ const program = require('commander')
 const chalk = require('chalk')
 const minimist = require('minimist')
 
+program.version(`vunt-cli v${require('./package').version}`)
+
 program
   .command('create <project-name>')
-  .description('create a new project with vunt-template')
-  .option('-e --no-depend', 'Skip dependencies installation')
+  .description('create a new project')
+  .option('-e, --no-depend', 'Skip dependencies installation')
   .option('-n, --no-git', 'Skip git initialization')
   .action((name, cmd) => {
     const options = cleanArgs(cmd)
-    // console.log(options)
 
     if (minimist(process.argv.slice(3))._.length > 1) {
       console.log(chalk.yellow('\n Info: You provided more than one argument. The first one will be used as the app\'s name, the rest are ignored.'))
@@ -22,7 +23,7 @@ program
 
 program.commands.forEach(c => c.on('--help', () => console.log()))
 
-const enhanceErrorMessages = require('./utils/enhanceErrorMessages')
+const {enhanceErrorMessages} = require('./utils')
 
 enhanceErrorMessages('missingArgument', argName => {
   return `Missing required argument ${chalk.yellow(`<${argName}>`)}.`

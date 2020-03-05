@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create": "set NODE_ENV=development&&node index create",
-    "pack": "set NODE_ENV=production&&npm pack"
+    "create": "cross-env NODE_ENV=development node index create",
+    "pack": "cross-env NODE_ENV=production npm pack"
   },
   "bin": {
     "vunt-cli": "index.js"
@@ -19,6 +19,7 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^2.20.3",
+    "cross-env": "^7.0.1",
     "download-git-repo": "^3.0.2",
     "execa": "^1.0.0",
     "fs-extra": "^8.1.0",
