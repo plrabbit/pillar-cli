@@ -1,38 +1,40 @@
-# Vunt-CLI
+# Pillar-CLI
 
-## Installation
+> Scaffolding tool for web app development.
+
+## 📦 Installation
 
 Download and install [Node.js](https://nodejs.org/), which including ```NPM```.
 
-Install ```vunt-cli``` globally in your machine. You may need administrator privileges to execute these commands.
+Install ```pillar-cli``` globally in your machine. You may need administrator privileges to execute these commands.
 ```
-npm install -g vunt-cli
+npm install -g @plrabbit/cli
 
 # OR
 
-yarn global add vunt-cli
+yarn global add @plrabbit/cli
 ```
 
 Check if you install it successfully.
 ```
-vunt-cli --version
+pillar --version
 ```
 
-## Creating a New Project
+## 🆕 Creating a New Project
 
 Just simply run:
 ```
-vunt-cli create project-name
+pillar create project-name
 ```
 
 The ```create``` command has some options for the project initialization, you may find them by running:
 ```
-vunt-cli create --help
+pillar create --help
 ```
 ```
 Usage: create [options] <project-name>
 
-create a new project with vunt-template
+create a new project
 
 Options:
   -e, --no-depend  Skip dependencies installation
@@ -40,18 +42,23 @@ Options:
   -h, --help       Output usage information
 ```
 
-## Development
+### Template(s)
+name|description
+:---:|:---:|
+[Vunt](https://github.com/plrabbit/vunt)| Vue 2.x + Ant Design
+
+## ‍💡 Development
 
 1. Clone this repository, then run ```yarn install``` to install dependencies.
 
-2. Run **create** script to create a new project using template [Vunt](https://github.com/plrabbit/vunt)
+2. Run **create** script to create a new project.
 
 ```
 yarn run create your-project-name
 ```
 
-Please note that the project will be generated **above the current directory(```../```)**, affected by the ```process.env.NODE_ENV```. So **DO NOT** run ```node index create xxx``` directly, otherwise the project will be generated in ```vunt-cli``` project directory.
+Please note that the project will be generated **above the current directory(```../```)**, affected by the ```process.env.NODE_ENV```. So **DO NOT** run ```node index create xxx``` directly, otherwise the project will be generated in ```pillar-cli``` project directory.
 
-## License
+## ✅ License
 
 [MIT license](./LICENSE).

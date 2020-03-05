@@ -1,7 +1,7 @@
 {
-  "name": "vunt-cli",
+  "name": "@plrabbit/cli",
   "version": "0.1.0",
-  "description": "CLI tool for vunt.",
+  "description": "Scaffolding tool for web app development",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,17 +9,24 @@
     "pack": "cross-env NODE_ENV=production npm pack"
   },
   "bin": {
-    "vunt-cli": "index.js"
+    "pillar": "index.js"
   },
+  "keywords": [
+    "scaffolding",
+    "cli",
+    "pillar"
+  ],
   "author": "plrabbit",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/plrabbit/vunt-cli.git"
+    "url": "https://github.com/plrabbit/pillar-cli.git"
   },
+  "homepage": "https://github.com/plrabbit/pillar-cli#readme",
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^2.20.3",
-    "cross-env": "^7.0.1",
+    "cross-env": "^6.0.3",
     "download-git-repo": "^3.0.2",
     "execa": "^1.0.0",
     "fs-extra": "^8.1.0",

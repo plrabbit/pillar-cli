@@ -20,7 +20,7 @@ async function create(projectName, options) {
 
   // Get absolute path for the project
   let targetDir
-  if(process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     targetDir = inCurrent ? path.resolve(cwd, '../') : path.resolve(cwd, `../${projectName}`)
   } else {
     targetDir = inCurrent ? path.resolve(cwd, '.') : path.resolve(cwd, projectName)
@@ -39,6 +39,23 @@ async function create(projectName, options) {
     process.exit(1)
   }
 
+  /* Template choosing */
+  await clearConsole()
+  const {template} = await inquirer.prompt([
+    {
+      name: 'template',
+      type: 'list',
+      message: `Choose a template:`,
+      choices: getTemplateChoices()
+    }
+  ])
+  if (!template) {
+    return
+  }
+
+  options.usingTemplate = templateContents.filter(n => n.name.toLowerCase() === template)[0]
+
+  /* Target directory handler */
   if (fs.existsSync(targetDir)) {
     await clearConsole()
 
@@ -73,21 +90,6 @@ async function create(projectName, options) {
       }
     }
   }
-
-  await clearConsole()
-  const {template} = await inquirer.prompt([
-    {
-      name: 'template',
-      type: 'list',
-      message: `Choose a template:`,
-      choices: getTemplateChoices()
-    }
-  ])
-  if (!template) {
-    return
-  }
-
-  options.usingTemplate = templateContents.filter(n => n.name.toLowerCase() === template)[0]
 
   const creator = new Creator(projectName, targetDir)
   await creator.create(options)

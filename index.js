@@ -4,7 +4,7 @@ const program = require('commander')
 const chalk = require('chalk')
 const minimist = require('minimist')
 
-program.version(`vunt-cli v${require('./package').version}`)
+program.version(`@plrabbit/cli ${require('./package').version}`)
 
 program
   .command('create <project-name>')
@@ -32,18 +32,15 @@ enhanceErrorMessages('missingArgument', argName => {
 program.parse(process.argv)
 if (program.args.length < 1) return program.help()
 
-function camelize (str) {
+function camelize(str) {
   return str.replace(/-(\w)/g, (_, c) => c ? c.toUpperCase() : '')
 }
 
-// commander passes the Command object itself as options,
-// extract only actual options into a fresh object.
-function cleanArgs (cmd) {
+function cleanArgs(cmd) {
   const args = {}
   cmd.options.forEach(o => {
     const key = camelize(o.long.replace(/(^--no-)|(^--)/, ''))
-    // if an option is not present and Command has a method with the same name
-    // it should not be copied
+
     if (typeof cmd[key] !== 'function' && typeof cmd[key] !== 'undefined') {
       args[key] = cmd[key]
     }
