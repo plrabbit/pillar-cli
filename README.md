@@ -7,7 +7,7 @@
 Download and install [Node.js](https://nodejs.org/), which including ```NPM```.
 
 Install ```pillar-cli``` globally in your machine. You may need administrator privileges to execute these commands.
-```
+```shell script
 npm install -g @plrabbit/cli
 
 # OR
@@ -16,19 +16,19 @@ yarn global add @plrabbit/cli
 ```
 
 Check if you install it successfully.
-```
+```shell script
 pillar --version
 ```
 
 ## 🆕 Creating a New Project
 
 Just simply run:
-```
+```shell script
 pillar create project-name
 ```
 
 The ```create``` command has some options for the project initialization, you may find them by running:
-```
+```shell script
 pillar create --help
 ```
 ```
@@ -55,7 +55,7 @@ name|description
 
 > Please note that the project will be generated above the current directory(```../```), affected by the ```process.env.NODE_ENV```.
 
-```
+```shell script
 yarn run create your-project-name
 ```
 

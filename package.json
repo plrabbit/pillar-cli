@@ -1,6 +1,6 @@
 {
   "name": "@plrabbit/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Scaffolding tool for web app development",
   "main": "index.js",
   "scripts": {

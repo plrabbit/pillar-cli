@@ -57,8 +57,6 @@ async function create(projectName, options) {
 
   /* Target directory handler */
   if (fs.existsSync(targetDir)) {
-    await clearConsole()
-
     if (inCurrent) {
       const {ok} = await inquirer.prompt([
         {
