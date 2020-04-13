@@ -53,13 +53,13 @@ name|description
 
 2. Run **create** script to create a new project.
 
-> Please note that the project will be generated above the current directory(```../```), affected by the ```process.env.NODE_ENV```.
+> Please note that the project will be generated ```_test-output``` when ```process.env.NODE_ENV === 'development'```.
 
 ```shell script
 yarn run create your-project-name
 ```
 
-DO NOT run ```node index create xxx``` directly, otherwise the project will be generated in ```pillar-cli``` project directory.
+DO NOT run ```node ./bin create xxx``` directly, otherwise the project will be generated in ```pillar-cli``` project root directory, which will cause some unknown problem.
 
 ## ✅ License
 

@@ -4,7 +4,7 @@ const program = require('commander')
 const chalk = require('chalk')
 const minimist = require('minimist')
 
-program.version(`@plrabbit/cli ${require('./package').version}`)
+program.version(`@plrabbit/cli ${require('../package').version}`)
 
 program
   .command('create <project-name>')
@@ -18,12 +18,12 @@ program
       console.log(chalk.yellow('\n Info: You provided more than one argument. The first one will be used as the app\'s name, the rest are ignored.'))
     }
 
-    require('./create')(name, options)
+    require('../lib/create')(name, options)
   })
 
 program.commands.forEach(c => c.on('--help', () => console.log()))
 
-const {enhanceErrorMessages} = require('./utils')
+const {enhanceErrorMessages} = require('../utils')
 
 enhanceErrorMessages('missingArgument', argName => {
   return `Missing required argument ${chalk.yellow(`<${argName}>`)}.`

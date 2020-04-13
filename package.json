@@ -1,15 +1,15 @@
 {
   "name": "@plrabbit/cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Scaffolding tool for web app development",
-  "main": "index.js",
+  "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create": "cross-env NODE_ENV=development node index create",
+    "create": "cross-env NODE_ENV=development node ./bin create",
     "pack": "cross-env NODE_ENV=production npm pack"
   },
   "bin": {
-    "pillar": "index.js"
+    "pillar": "bin/index.js"
   },
   "keywords": [
     "scaffolding",
